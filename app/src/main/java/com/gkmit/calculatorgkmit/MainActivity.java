@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
-
     private Button btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn0,btn_add,btn_sub,btn_div,btn_ac,btn_mul,btn_eql;
     private TextView result;
     private float number1,number2;
@@ -80,13 +79,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(division){
             //will raise exception when number2 is equal to 0
-            try{
+            if((int)number2!=0){
                 float answer = number1 / number2;
                 result.setText(answer + "");
                 Toast.makeText(MainActivity.this, String.valueOf(answer), Toast.LENGTH_SHORT).show();
             }
-            catch(ArithmeticException error){
-                Toast.makeText(this, "Division by zero " +error, Toast.LENGTH_SHORT).show();
+            else{
+                Toast.makeText(this, "Division by zero error!!" , Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -106,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 result.setText(result.getText().toString()+"2");
                 break;
             case R.id.btn3:
-
                 result.setText(result.getText().toString()+"3");
                 break;
             case R.id.btn4:
