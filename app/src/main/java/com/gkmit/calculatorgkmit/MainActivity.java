@@ -63,10 +63,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void compute(float number1, float number2) {
 
         if(add){
-            float answer=0;
-            answer = number1+number2;
+            float answer = number1+number2;
             tvResult.setText(String.valueOf(answer));
-            Log.d("addition",String.valueOf(answer));
             Toast.makeText(MainActivity.this, String.valueOf(answer) +"addition", Toast.LENGTH_SHORT).show();
 
         }
@@ -145,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     buttonMultiply.setClickable(false);
                 }
                 break;
+
             case R.id.button_subtract:
                     number1 = Float.parseFloat(tvResult.getText() + "");
                     subtraction = true;
@@ -153,22 +152,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     buttonSubtract.setClickable(false);
                     buttonDivide.setClickable(false);
                     buttonMultiply.setClickable(false);
+                    break;
 
-                break;
             case R.id.button_multiply:
-                number1 = Float.parseFloat(tvResult.getText() + "");
-                multiplication = true;
-                tvResult.setText("");
-                buttonAdd.setClickable(false);
-                buttonSubtract.setClickable(false);
-                buttonDivide.setClickable(false);
-                buttonMultiply.setClickable(false);
-                break;
+                    number1 = Float.parseFloat(tvResult.getText() + "");
+                    multiplication = true;
+                    tvResult.setText("");
+                    buttonAdd.setClickable(false);
+                    buttonSubtract.setClickable(false);
+                    buttonDivide.setClickable(false);
+                    buttonMultiply.setClickable(false);
+                    break;
+
             case R.id.button_divide:
-                //if(tvResult==null){
-                 //   tvResult.setText("");
-                //}
-                //else {
                     number1 = Float.parseFloat(tvResult.getText() + "");
                     division = true;
                     tvResult.setText(null);
@@ -176,8 +172,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     buttonSubtract.setClickable(false);
                     buttonDivide.setClickable(false);
                     buttonMultiply.setClickable(false);
-                //}
-                break;
+                    break;
+
             case R.id.button_equal:
                 if(add || division || multiplication || subtraction ) {
                     if(tvResult.getText() != "") {
