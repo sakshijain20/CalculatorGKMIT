@@ -31,31 +31,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (add) {
             answer = number1 + number2;
             textViewResult.setText(answer + "");
-            Toast.makeText(MainActivity.this, String.valueOf(number1+ "+" +number2 + "=" +answer), Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,
+                    String.valueOf(number1+ "+" +number2 + "=" +answer),
+                    Toast.LENGTH_SHORT).show();
             add=false;
         }
-        if (subtraction) {
+        else if (subtraction) {
             answer = number1 - number2;
             textViewResult.setText(answer + "");
-            Toast.makeText(MainActivity.this, String.valueOf(number1+ "-" +number2 + "=" +answer), Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,
+                    String.valueOf(number1+ "-" +number2 + "=" +answer),
+                    Toast.LENGTH_SHORT).show();
             subtraction=false;
         }
-        if (multiplication) {
+        else if (multiplication) {
             answer = number1 * number2;
             textViewResult.setText(answer + "");
-            Toast.makeText(MainActivity.this, String.valueOf(number1+ "×" +number2 + "=" +answer), Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,
+                    String.valueOf(number1+ "×" +number2 + "=" +answer),
+                    Toast.LENGTH_SHORT).show();
             multiplication=false;
         }
-        if (division) {
+        else if (division) {
             //will raise exception when number2 is equal to 0
             if (number2 != 0) {
                 float num1 = Float.parseFloat(String.valueOf(number1));
                 float num2 = Float.parseFloat(String.valueOf(number2));
                 textViewResult.setText(num1/num2 + "");
-                Toast.makeText(MainActivity.this, String.valueOf(num1+ "÷" +num2 + "=" +num1/num2), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,
+                        String.valueOf(num1+ "÷" +num2 + "=" +num1/num2),
+                        Toast.LENGTH_SHORT).show();
                 division=false;
             } else {
-                Toast.makeText(this, "Division by zero error!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,
+                        "Division by zero error!!",
+                        Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -157,7 +167,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         buttonDivide.setClickable(true);
                         buttonMultiply.setClickable(true);
                     } else {
-                        Toast.makeText(this, "Please enter the second number", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this,
+                                "Please enter the second number",
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
