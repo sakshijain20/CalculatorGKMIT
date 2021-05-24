@@ -9,12 +9,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener
-{
-    private Button button1,button2,button3,button4,button5,button6,button7,button8,button9,button0,buttonAdd,buttonSubtract,buttonDivide,buttonAllClear,buttonMultiply,buttonEqual;
-    private TextView tvResult;
-    private float number1,number2;
-    private boolean add,division,multiplication,subtraction;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private Button button1, button2, button3, button4, button5, button6, button7, button8, button9, button0, buttonAdd, buttonSubtract, buttonDivide, buttonAllClear, buttonMultiply, buttonEqual;
+    private TextView textViewResult;
+    private float number1, number2;
+    private boolean add, division, multiplication, subtraction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonAllClear = (Button) findViewById(R.id.button_ac);
         buttonEqual = (Button) findViewById(R.id.button_equal);
 
-        tvResult = (TextView) findViewById(R.id.result_view);
+        textViewResult = (TextView) findViewById(R.id.textView_result);
 
         button0.setOnClickListener(this);
         button1.setOnClickListener(this);
@@ -62,30 +61,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //function to perform operation
     private void compute(float number1, float number2) {
 
-        if(add){
-            float answer = number1+number2;
-            tvResult.setText(String.valueOf(answer));
-            Toast.makeText(MainActivity.this, String.valueOf(answer) +"addition", Toast.LENGTH_SHORT).show();
+        if (add) {
+            float answer = number1 + number2;
+            textViewResult.setText(String.valueOf(answer));
+            Toast.makeText(MainActivity.this, String.valueOf(answer) + "addition", Toast.LENGTH_SHORT).show();
         }
-        if(subtraction){
-            float answer = number1-number2;
-            tvResult.setText(answer+"");
+        if (subtraction) {
+            float answer = number1 - number2;
+            textViewResult.setText(answer + "");
             Toast.makeText(MainActivity.this, String.valueOf(answer), Toast.LENGTH_SHORT).show();
         }
-        if(multiplication){
-            float answer = number1*number2;
-            tvResult.setText(answer+"");
+        if (multiplication) {
+            float answer = number1 * number2;
+            textViewResult.setText(answer + "");
             Toast.makeText(MainActivity.this, String.valueOf(answer), Toast.LENGTH_SHORT).show();
         }
-        if(division){
+        if (division) {
             //will raise exception when number2 is equal to 0
-            if(number2!=0){
+            if (number2 != 0) {
                 float answer = number1 / number2;
-                tvResult.setText(answer + "");
+                textViewResult.setText(answer + "");
                 Toast.makeText(MainActivity.this, String.valueOf(answer), Toast.LENGTH_SHORT).show();
-            }
-            else{
-                Toast.makeText(this, "Division by zero error!!" , Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Division by zero error!!", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -96,46 +94,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button0:
-                tvResult.setText(tvResult.getText().toString()+"0");
+                textViewResult.setText(textViewResult.getText().toString() + "0");
                 break;
             case R.id.button1:
-                tvResult.setText(tvResult.getText().toString()+"1");
+                textViewResult.setText(textViewResult.getText().toString() + "1");
                 break;
             case R.id.button2:
-                tvResult.setText(tvResult.getText().toString()+"2");
+                textViewResult.setText(textViewResult.getText().toString() + "2");
                 break;
             case R.id.button3:
-                tvResult.setText(tvResult.getText().toString()+"3");
+                textViewResult.setText(textViewResult.getText().toString() + "3");
                 break;
             case R.id.button4:
-                tvResult.setText(tvResult.getText().toString()+"4");
+                textViewResult.setText(textViewResult.getText().toString() + "4");
                 break;
             case R.id.button5:
-                tvResult.setText(tvResult.getText().toString()+"5");
+                textViewResult.setText(textViewResult.getText().toString() + "5");
                 break;
             case R.id.button6:
-                tvResult.setText(tvResult.getText().toString()+"6");
+                textViewResult.setText(textViewResult.getText().toString() + "6");
                 break;
             case R.id.button7:
-                tvResult.setText(tvResult.getText().toString()+"7");
+                textViewResult.setText(textViewResult.getText().toString() + "7");
                 break;
             case R.id.button8:
-                tvResult.setText(tvResult.getText().toString()+"8");
+                textViewResult.setText(textViewResult.getText().toString() + "8");
                 break;
             case R.id.button9:
-                tvResult.setText(tvResult.getText().toString()+"9");
+                textViewResult.setText(textViewResult.getText().toString() + "9");
                 break;
             case R.id.button_ac:
-                tvResult.setText("");
+                textViewResult.setText("");
                 break;
             case R.id.button_add:
-                if(tvResult==null ){
-                    tvResult.setText("");
-                }
-                else {
-                    number1 = Float.parseFloat(tvResult.getText() + "");
+                if (textViewResult == null) {
+                    textViewResult.setText("");
+                } else {
+                    number1 = Float.parseFloat(textViewResult.getText() + "");
                     add = true;
-                    tvResult.setText(null);
+                    textViewResult.setText(null);
                     buttonAdd.setClickable(false);
                     buttonSubtract.setClickable(false);
                     buttonDivide.setClickable(false);
@@ -144,62 +141,61 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.button_subtract:
-                    number1 = Float.parseFloat(tvResult.getText() + "");
-                    subtraction = true;
-                    tvResult.setText(null);
-                    buttonAdd.setClickable(false);
-                    buttonSubtract.setClickable(false);
-                    buttonDivide.setClickable(false);
-                    buttonMultiply.setClickable(false);
-                    break;
+                number1 = Float.parseFloat(textViewResult.getText() + "");
+                subtraction = true;
+                textViewResult.setText(null);
+                buttonAdd.setClickable(false);
+                buttonSubtract.setClickable(false);
+                buttonDivide.setClickable(false);
+                buttonMultiply.setClickable(false);
+                break;
 
             case R.id.button_multiply:
-                    number1 = Float.parseFloat(tvResult.getText() + "");
-                    multiplication = true;
-                    tvResult.setText(null);
-                    buttonAdd.setClickable(false);
-                    buttonSubtract.setClickable(false);
-                    buttonDivide.setClickable(false);
-                    buttonMultiply.setClickable(false);
-                    break;
+                number1 = Float.parseFloat(textViewResult.getText() + "");
+                multiplication = true;
+                textViewResult.setText(null);
+                buttonAdd.setClickable(false);
+                buttonSubtract.setClickable(false);
+                buttonDivide.setClickable(false);
+                buttonMultiply.setClickable(false);
+                break;
 
             case R.id.button_divide:
-                    number1 = Float.parseFloat(tvResult.getText() + "");
-                    division = true;
-                    tvResult.setText(null);
-                    buttonAdd.setClickable(false);
-                    buttonSubtract.setClickable(false);
-                    buttonDivide.setClickable(false);
-                    buttonMultiply.setClickable(false);
-                    break;
+                number1 = Float.parseFloat(textViewResult.getText() + "");
+                division = true;
+                textViewResult.setText(null);
+                buttonAdd.setClickable(false);
+                buttonSubtract.setClickable(false);
+                buttonDivide.setClickable(false);
+                buttonMultiply.setClickable(false);
+                break;
 
             case R.id.button_equal:
-                if(add || division || multiplication || subtraction ) {
-                    if(tvResult.getText() != "") {
-                        number2 = Float.parseFloat(tvResult.getText() + "");
+                if (add || division || multiplication || subtraction) {
+                    if (textViewResult.getText() != "") {
+                        number2 = Float.parseFloat(textViewResult.getText() + "");
                         buttonAdd.setClickable(true);
                         buttonSubtract.setClickable(true);
                         buttonDivide.setClickable(true);
                         buttonMultiply.setClickable(true);
-                    }
-                    else {
+                    } else {
                         Toast.makeText(this, "Please enter the second number", Toast.LENGTH_SHORT).show();
                     }
                 }
-                if(add){
-                    compute(number1,number2);
+                if (add) {
+                    compute(number1, number2);
                     add = false;
                 }
-                if(division){
-                    compute(number1,number2);
+                if (division) {
+                    compute(number1, number2);
                     division = false;
                 }
-                if(subtraction){
-                    compute(number1,number2);
+                if (subtraction) {
+                    compute(number1, number2);
                     subtraction = false;
                 }
-                if(multiplication){
-                    compute(number1,number2);
+                if (multiplication) {
+                    compute(number1, number2);
                     multiplication = false;
                 }
                 break;
