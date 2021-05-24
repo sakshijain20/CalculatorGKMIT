@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             float answer = number1+number2;
             tvResult.setText(String.valueOf(answer));
             Toast.makeText(MainActivity.this, String.valueOf(answer) +"addition", Toast.LENGTH_SHORT).show();
-
         }
         if(subtraction){
             float answer = number1-number2;
@@ -157,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_multiply:
                     number1 = Float.parseFloat(tvResult.getText() + "");
                     multiplication = true;
-                    tvResult.setText("");
+                    tvResult.setText(null);
                     buttonAdd.setClickable(false);
                     buttonSubtract.setClickable(false);
                     buttonDivide.setClickable(false);
