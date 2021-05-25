@@ -3,17 +3,14 @@ package com.gkmit.calculatorgkmit;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Button button1, button2, button3, button4, button5, button6, button7, button8, button9, button0,
-            buttonAdd, buttonSubtract, buttonDivide, buttonAllClear, buttonMultiply, buttonEqual;
+                    buttonAdd, buttonSubtract, buttonDivide, buttonAllClear, buttonMultiply, buttonEqual;
     private TextView textViewResult, textViewInput;
     private int number1, number2;
     private boolean add, division, multiplication, subtraction;
@@ -30,25 +27,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int answer;
         if (add) {
             answer = number1 + number2;
-            textViewResult.setText(answer + "");
+            displayResult(answer);
             Toast.makeText(MainActivity.this,
-                    String.valueOf(number1+ "+" +number2 + "=" +answer),
+                    number1+ "+" +number2 + "=" +answer,
                     Toast.LENGTH_SHORT).show();
             add=false;
         }
         else if (subtraction) {
             answer = number1 - number2;
-            textViewResult.setText(answer + "");
+            displayResult(answer);
             Toast.makeText(MainActivity.this,
-                    String.valueOf(number1+ "-" +number2 + "=" +answer),
+                    number1+ "-" +number2 + "=" +answer,
                     Toast.LENGTH_SHORT).show();
             subtraction=false;
         }
         else if (multiplication) {
             answer = number1 * number2;
+            displayResult(answer);
             textViewResult.setText(answer + "");
             Toast.makeText(MainActivity.this,
-                    String.valueOf(number1+ "×" +number2 + "=" +answer),
+                    number1+ "×" +number2 + "=" +answer,
                     Toast.LENGTH_SHORT).show();
             multiplication=false;
         }
@@ -59,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 float num2 = Float.parseFloat(String.valueOf(number2));
                 textViewResult.setText(num1/num2 + "");
                 Toast.makeText(MainActivity.this,
-                        String.valueOf(num1+ "÷" +num2 + "=" +num1/num2),
+                        num1+ "÷" +num2 + "=" +num1/num2,
                         Toast.LENGTH_SHORT).show();
                 division=false;
             } else {
@@ -69,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
+    }
+
+    private void displayResult(int answer) {
+        textViewResult.setText(answer + "");
     }
 
     @Override
@@ -107,20 +109,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_ac:
                 textViewResult.setText("");
                 textViewInput.setText("");
+                enableButtons();
                 break;
             case R.id.button_add:
-                if (textViewResult == null) {
-                    textViewResult.setText("");
-                } else {
-                    number1 = Integer.parseInt(textViewResult.getText() + "");
-                    add = true;
-                    textViewInput.setText(number1+ " + ");
-                    textViewResult.setText(null);
-                    buttonAdd.setClickable(false);
-                    buttonSubtract.setClickable(false);
-                    buttonDivide.setClickable(false);
-                    buttonMultiply.setClickable(false);
-                }
+                number1 = Integer.parseInt(textViewResult.getText() + "");
+                add = true;
+                textViewInput.setText(number1+ " + ");
+                textViewResult.setText(null);
+                disableButtons();
                 break;
 
             case R.id.button_subtract:
@@ -128,10 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 subtraction = true;
                 textViewInput.setText(number1+ " - ");
                 textViewResult.setText(null);
-                buttonAdd.setClickable(false);
-                buttonSubtract.setClickable(false);
-                buttonDivide.setClickable(false);
-                buttonMultiply.setClickable(false);
+                disableButtons();
                 break;
 
             case R.id.button_multiply:
@@ -139,10 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 multiplication = true;
                 textViewInput.setText(number1+ " × ");
                 textViewResult.setText(null);
-                buttonAdd.setClickable(false);
-                buttonSubtract.setClickable(false);
-                buttonDivide.setClickable(false);
-                buttonMultiply.setClickable(false);
+                disableButtons();
                 break;
 
             case R.id.button_divide:
@@ -150,10 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 division = true;
                 textViewInput.setText(number1+ " ÷ ");
                 textViewResult.setText(null);
-                buttonAdd.setClickable(false);
-                buttonSubtract.setClickable(false);
-                buttonDivide.setClickable(false);
-                buttonMultiply.setClickable(false);
+                disableButtons();
                 break;
 
             case R.id.button_equal:
@@ -162,10 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         number2 = Integer.parseInt(textViewResult.getText() + "");
                         textViewInput.setText(textViewInput.getText().toString()+ number2);
                         compute(number1, number2);
-                        buttonAdd.setClickable(true);
-                        buttonSubtract.setClickable(true);
-                        buttonDivide.setClickable(true);
-                        buttonMultiply.setClickable(true);
+                        enableButtons();
                     } else {
                         Toast.makeText(this,
                                 "Please enter the second number",
@@ -178,26 +162,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void mapIds() {
-        button0 = (Button) findViewById(R.id.button0);
-        button1 = (Button) findViewById(R.id.button1);
-        button2 = (Button) findViewById(R.id.button2);
-        button3 = (Button) findViewById(R.id.button3);
-        button4 = (Button) findViewById(R.id.button4);
-        button5 = (Button) findViewById(R.id.button5);
-        button6 = (Button) findViewById(R.id.button6);
-        button7 = (Button) findViewById(R.id.button7);
-        button8 = (Button) findViewById(R.id.button8);
-        button9 = (Button) findViewById(R.id.button9);
-        buttonAdd = (Button) findViewById(R.id.button_add);
-        buttonSubtract = (Button) findViewById(R.id.button_subtract);
-        buttonDivide = (Button) findViewById(R.id.button_divide);
-        buttonMultiply = (Button) findViewById(R.id.button_multiply);
-        buttonAllClear = (Button) findViewById(R.id.button_ac);
-        buttonEqual = (Button) findViewById(R.id.button_equal);
+    private void enableButtons() {
+        buttonAdd.setClickable(true);
+        buttonSubtract.setClickable(true);
+        buttonDivide.setClickable(true);
+        buttonMultiply.setClickable(true);
+    }
 
-        textViewResult = (TextView) findViewById(R.id.textView_result);
-        textViewInput = (TextView) findViewById(R.id.textView_input);
+    private void disableButtons() {
+        buttonAdd.setClickable(false);
+        buttonSubtract.setClickable(false);
+        buttonDivide.setClickable(false);
+        buttonMultiply.setClickable(false);
+    }
+
+    private void mapIds() {
+        button0 = findViewById(R.id.button0);
+        button1 = findViewById(R.id.button1);
+        button2 = findViewById(R.id.button2);
+        button3 = findViewById(R.id.button3);
+        button4 = findViewById(R.id.button4);
+        button5 = findViewById(R.id.button5);
+        button6 = findViewById(R.id.button6);
+        button7 = findViewById(R.id.button7);
+        button8 = findViewById(R.id.button8);
+        button9 = findViewById(R.id.button9);
+        buttonAdd = findViewById(R.id.button_add);
+        buttonSubtract = findViewById(R.id.button_subtract);
+        buttonDivide = findViewById(R.id.button_divide);
+        buttonMultiply = findViewById(R.id.button_multiply);
+        buttonAllClear = findViewById(R.id.button_ac);
+        buttonEqual = findViewById(R.id.button_equal);
+
+        textViewResult = findViewById(R.id.textView_result);
+        textViewInput = findViewById(R.id.textView_input);
 
         button0.setOnClickListener(this);
         button1.setOnClickListener(this);
@@ -216,4 +214,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonDivide.setOnClickListener(this);
         buttonEqual.setOnClickListener(this);
     }
+
 }
