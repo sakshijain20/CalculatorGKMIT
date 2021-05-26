@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             answer = number1 + number2;
             displayResult(answer);
             Toast.makeText(MainActivity.this,
-                    number1+ "+" +number2 + "=" +answer,
+                    "Addition result : " +answer,
                     Toast.LENGTH_SHORT).show();
             add=false;
         }
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             answer = number1 - number2;
             displayResult(answer);
             Toast.makeText(MainActivity.this,
-                    number1+ "-" +number2 + "=" +answer,
+                     "  Subtraction result : " +answer,
                     Toast.LENGTH_SHORT).show();
             subtraction=false;
         }
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             displayResult(answer);
             textViewResult.setText(answer + "");
             Toast.makeText(MainActivity.this,
-                    number1+ "×" +number2 + "=" +answer,
+                    "Multiplication result : " +answer,
                     Toast.LENGTH_SHORT).show();
             multiplication=false;
         }
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 float num2 = Float.parseFloat(String.valueOf(number2));
                 textViewResult.setText(num1/num2 + "");
                 Toast.makeText(MainActivity.this,
-                        num1+ "÷" +num2 + "=" +num1/num2,
+                        "Division result : " +num1/num2,
                         Toast.LENGTH_SHORT).show();
                 division=false;
             } else {
