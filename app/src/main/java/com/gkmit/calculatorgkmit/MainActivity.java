@@ -10,10 +10,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Button button1, button2, button3, button4, button5, button6, button7, button8, button9, button0,
-                    buttonAdd, buttonSubtract, buttonDivide, buttonAllClear, buttonMultiply, buttonEqual;
+                    buttonAdd, buttonSubtract, buttonDivide, buttonAllClear, buttonMultiply, buttonEqual, buttonDot;
     private TextView textViewResult, textViewInput;
-    private int number1, number2;
-    private boolean add, division, multiplication, subtraction;
+    private float number1, number2;
+
+    private boolean add, division, multiplication, subtraction, decimal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +24,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //function to perform operation
-    private void compute(int number1, int number2) {
-        int answer;
+    private void compute(float number1, float number2) {
+        float answer;
         if (add) {
             answer = number1 + number2;
             displayResult(answer);
@@ -44,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (multiplication) {
             answer = number1 * number2;
             displayResult(answer);
-            textViewResult.setText(answer + "");
             Toast.makeText(MainActivity.this,
                     "Multiplication result : " +answer,
                     Toast.LENGTH_SHORT).show();
@@ -53,11 +53,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (division) {
             //will raise exception when number2 is equal to 0
             if (number2 != 0) {
-                float num1 = Float.parseFloat(String.valueOf(number1));
-                float num2 = Float.parseFloat(String.valueOf(number2));
-                textViewResult.setText(num1/num2 + "");
+                answer = number1/number2;
+                displayResult(answer);
                 Toast.makeText(MainActivity.this,
-                        "Division result : " +num1/num2,
+                        "Division result : " +answer,
                         Toast.LENGTH_SHORT).show();
                 division=false;
             } else {
@@ -66,11 +65,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.LENGTH_SHORT).show();
             }
         }
-
     }
 
-    private void displayResult(int answer) {
-        textViewResult.setText(answer + "");
+    private void displayResult(float result) {
+        if (result == (int) result) {
+            textViewResult.setText((int) result + "");
+        } else {
+            textViewResult.setText(result + "");
+        }
     }
 
     @Override
@@ -106,13 +108,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button9:
                 textViewResult.setText(textViewResult.getText().toString() + "9");
                 break;
+            case R.id.button_dot:
+                textViewResult.setText(textViewResult.getText().toString() + ".");
+                decimal=true;
+                break;
             case R.id.button_ac:
                 textViewResult.setText("");
                 textViewInput.setText("");
                 enableButtons();
                 break;
+
             case R.id.button_add:
-                number1 = Integer.parseInt(textViewResult.getText() + "");
+                number1 = getNumberOne();
                 add = true;
                 textViewInput.setText(number1+ " + ");
                 textViewResult.setText(null);
@@ -120,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.button_subtract:
-                number1 = Integer.parseInt(textViewResult.getText() + "");
+                number1 = getNumberOne();
                 subtraction = true;
                 textViewInput.setText(number1+ " - ");
                 textViewResult.setText(null);
@@ -128,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.button_multiply:
-                number1 = Integer.parseInt(textViewResult.getText() + "");
+                number1 = getNumberOne();
                 multiplication = true;
                 textViewInput.setText(number1+ " × ");
                 textViewResult.setText(null);
@@ -136,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.button_divide:
-                number1 = Integer.parseInt(textViewResult.getText() + "");
+                number1 = getNumberOne();
                 division = true;
                 textViewInput.setText(number1+ " ÷ ");
                 textViewResult.setText(null);
@@ -146,10 +153,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_equal:
                 if (add || division || multiplication || subtraction) {
                     if (textViewResult.getText() != "") {
-                        number2 = Integer.parseInt(textViewResult.getText() + "");
+                        number2 = (decimal) ? Float.parseFloat(textViewResult.getText().toString()) :
+                                                Integer.parseInt(textViewResult.getText() + "");
                         textViewInput.setText(textViewInput.getText().toString()+ number2);
                         compute(number1, number2);
                         enableButtons();
+                        decimal = false;
                     } else {
                         Toast.makeText(this,
                                 "Please enter the second number",
@@ -160,6 +169,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 break;
         }
+    }
+
+    private float getNumberOne() {
+         number2 = (decimal) ? Float.parseFloat(textViewResult.getText().toString()) :
+                Integer.parseInt(textViewResult.getText() + "");
+        return number2;
     }
 
     private void enableButtons() {
@@ -193,6 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonMultiply = findViewById(R.id.button_multiply);
         buttonAllClear = findViewById(R.id.button_ac);
         buttonEqual = findViewById(R.id.button_equal);
+        buttonDot = findViewById(R.id.button_dot);
 
         textViewResult = findViewById(R.id.textView_result);
         textViewInput = findViewById(R.id.textView_input);
@@ -213,6 +229,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonMultiply.setOnClickListener(this);
         buttonDivide.setOnClickListener(this);
         buttonEqual.setOnClickListener(this);
+        buttonDot.setOnClickListener(this);
     }
 
 }
